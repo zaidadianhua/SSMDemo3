@@ -12,6 +12,7 @@ public class TestSpring {
         ApplicationContext ac = new ClassPathXmlApplicationContext("classpath:applicationContext.xml");
         AccountService as = (AccountService) ac.getBean("accountService");
         as.findAll();
+        System.out.println("hello git");
     }
 }
 
