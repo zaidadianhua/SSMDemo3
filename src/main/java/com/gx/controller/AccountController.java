@@ -58,7 +58,9 @@ public class AccountController {
         System.out.println("querybookname"+name);
         List<Account> accountList = accountService.findByName(name);
         model.addAttribute("accountsname",accountList);
+        System.out.println("来了git1");
         return "account_findByName";
+
     }
 }
 
