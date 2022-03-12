@@ -13,6 +13,7 @@ public class TestSpring {
         AccountService as = (AccountService) ac.getBean("accountService");
         as.findAll();
         System.out.println("hello master!");
+        System.out.println("hot-fix test!");
     }
 }
 
