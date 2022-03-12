@@ -1,0 +1,76 @@
+
+
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+
+    <meta charset="UTF-8">
+    <title>员工信息</title>
+
+    <link href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+
+<div class="container">
+    <div class="row clearfix">
+        <div class="col-md-12 colunm">
+            <div class="page-header">
+                <h1>
+                    <small>人员列表-------查询显示</small>
+                </h1>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="row-md-4 column">
+            <a class="btn btn-primary" th:href="@{/account}" style="float: right">返回主页</a>
+        </div>
+    <div class="row clearfix">
+        <div class="col-md-12 colunm">
+            <table id="dataTable" class="table table-hover tabler-striped">
+                <thead>
+                <tr>
+                    <th>编号</th>
+                    <th>名字</th>
+                    <th>余额</th>
+                    <th>性别</th>
+                    <th>操作</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="employee : ${accountsname}">
+                    <td th:text="${employee.id}"></td>
+                    <td th:text="${employee.name}"></td>
+                    <td th:text="${employee.money}"></td>
+                    <td th:text="${employee.gender}"></td>
+                    <td>
+                        <!--            <a th:href="@{/employee/}+${employee.id}">delete</a>-->
+                        <a @click="deleteAccount" th:href="@{'/account/'+${employee.id}}">删除</a>
+                        <a th:href="@{'/account/'+${employee.id}}">修改</a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<form id="deleteForm" method="post">
+    <input type="hidden" name="_method" value="delete">
+</form>
+<script type="text/javascript" th:src="@{/static/js/vue.js}"></script>
+<script type="text/javascript">
+    var vue=new Vue({
+        el:"#dataTable",
+        methods:{
+            deleteAccount:function (event) {
+                var deleteForm= document.getElementById("deleteForm")
+                deleteForm.action=event.target.href;
+                deleteForm.submit();
+                //取消超链接的默认行为
+                event.preventDefault();
+            }
+        }
+    });
+</script>
+</body>
+</html>
